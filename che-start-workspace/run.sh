@@ -5,11 +5,15 @@ source ./_setenv.sh
 export LOG_DIR=$JOB_BASE_NAME-$BUILD_NUMBER
 mkdir $LOG_DIR
 
+
 export COMMON="common.git"
 git clone https://github.com/pmacik/openshiftio-performance-common $COMMON
-
 source $COMMON/config/_setenv.sh
+
+echo "setting current workdir to WORKSPACE: $(pwd)"
 WORKSPACE=$(pwd)
+echo "Content of workdir:"
+ls
 
 echo " Wait for the server to become available"
 ./_wait-for-server.sh
@@ -39,6 +43,7 @@ echo " Tests will end approximately at $endtime)"
 
 $COMMON/_execute.sh
 
+echo "in workdir: $(pwd)"
 echo "Removing all workspaces from accounts"
 ./removeWorkspaces.sh
 
