@@ -11,6 +11,9 @@ git clone https://github.com/pmacik/openshiftio-performance-common $COMMON
 source $COMMON/config/_setenv.sh
 WORKSPACE=$(pwd)
 
+ git clone -b zabbix-metric-prefix https://github.com/pmacik/openshiftio-performance-common $COMMON
+
+
 echo " Wait for the server to become available"
 ./_wait-for-server.sh
 if [ $? -gt 0 ]; then
