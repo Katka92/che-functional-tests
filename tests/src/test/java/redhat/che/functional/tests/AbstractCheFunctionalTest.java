@@ -135,9 +135,15 @@ public abstract class AbstractCheFunctionalTest {
 	}
 
 	private void waitForLoaderToDisappear() {
+		try {
 		System.out.println("Loader bar present: " + loaderProgressBar.isDisplayed());
 		Graphene.waitModel().until().element(loaderProgressBar).is().visible();
-		Graphene.waitModel().until().element(ideElement).is().visible();
+		Graphene.waitModel().until().element(ideElement).is().visible(); 
+		} catch (Exception e) {
+			//don't fail if loader is not present
+			return;
+		}
+		
 	}
 
 	private void waitForWorkspaceIsRunning() {
